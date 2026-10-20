@@ -277,13 +277,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
         <div><small>Email</small>iriziarchi@gmail.com</div>
       </div>
     </div>
-    <form id="contact-form">
+    <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="site-web">
+      <input type="hidden" name="form-name" value="contact"><p hidden><label>Ne pas remplir<input name="site-web"></label></p>
       <label for="f-name">Nom<input id="f-name" name="name" required></label>
       <label for="f-email">Email<input id="f-email" name="email" type="email" required></label>
       <label for="f-type">Type de projet<select id="f-type" name="type"><option>Maison individuelle</option><option>Écoconstruction</option><option>Lotissement</option><option>Enseignement ou intervention</option><option>Prises de vue et suivi de chantier</option><option>Autre</option></select></label>
       <label for="f-msg">Message<textarea id="f-msg" name="message"></textarea></label>
       <button type="submit">Envoyer</button>
-      <p class="sent" id="f-sent" hidden>Maquette : le formulaire sera relié à votre email lors de la mise en ligne.</p>
+      <p class="sent" id="f-sent" hidden>Merci, votre message a bien été envoyé. Nous vous répondons rapidement.</p>
     </form>
   </div></section>
 </main>
@@ -291,5 +292,5 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 <footer><div class="wrap"><span>© IRIZI Architecte · Agadir, Maroc</span><span>Photographies et vues aériennes : IRIZI Architecte</span></div></footer>
 
 <script>
-document.getElementById('contact-form').addEventListener('submit',function(e){e.preventDefault();document.getElementById('f-sent').hidden=false;});
+document.getElementById('contact-form').addEventListener('submit',function(e){e.preventDefault();var f=this;fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()}).then(function(r){if(!r.ok)throw r;f.reset();document.getElementById('f-sent').hidden=false;}).catch(function(){alert('Envoi impossible pour le moment. Merci de réessayer plus tard.');});});
 </script>
