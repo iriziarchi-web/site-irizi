@@ -1,0 +1,295 @@
+<title>IRIZI Architecte</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one-page site, image-led. Black header band like the logo, earth-toned photo blocks, red rule as the only accent. */
+:root{
+  --bg:#f6f4f0; --surface:#ebe6de; --fg:#161514; --muted:#6b665f; --line:#d6cfc4;
+  --band:#000; --band-fg:#f4f2ee; --accent:#e10600;
+  --earth1:#b88a63; --earth2:#8f6a4b; --earth3:#cdb59a;
+  --display:"Antonio","Oswald","Arial Narrow",sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121110; --surface:#1d1b19; --fg:#efece7; --muted:#a39d94; --line:#34302b;
+  --band:#000; --band-fg:#f4f2ee; --accent:#ff2a1f;
+  --earth1:#8a6547; --earth2:#5e4532; --earth3:#9c8670; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121110; --surface:#1d1b19; --fg:#efece7; --muted:#a39d94; --line:#34302b;
+  --band:#000; --band-fg:#f4f2ee; --accent:#ff2a1f;
+  --earth1:#8a6547; --earth2:#5e4532; --earth3:#9c8670; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--band)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--band);color:var(--band-fg)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:0}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{height:84px;width:auto;display:block}
+@media (max-width:620px){.brand img{height:64px}}
+nav ul{display:flex;flex-wrap:wrap;gap:6px 22px;list-style:none;margin:0;padding:0}
+nav a{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:14px;text-decoration:none;color:#bdb8b0}
+nav a:hover{color:var(--band-fg)}
+
+/* photo placeholder */
+.ph{position:relative;overflow:hidden;background:
+   linear-gradient(160deg,var(--earth3) 0%,var(--earth1) 55%,var(--earth2) 100%);
+   display:flex;align-items:flex-end;color:#fff}
+.ph::before{content:"";position:absolute;inset:0;opacity:.18;background:
+   repeating-linear-gradient(0deg,transparent 0 22px,rgba(0,0,0,.35) 22px 23px)}
+.ph span{position:relative;font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,.45);padding:4px 8px;margin:10px}
+
+/* hero */
+.hero{position:relative}
+.hero .ph{height:min(72vh,640px);min-height:380px}
+.hero-text{position:absolute;inset:auto 0 0 0;padding-block:48px;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.hero h1{font-family:var(--display);font-weight:600;text-transform:uppercase;color:#fff;font-size:clamp(38px,6.4vw,84px);line-height:.98;letter-spacing:.01em;margin:0;max-width:14ch;text-wrap:balance}
+.hero p{color:#efe9e1;max-width:56ch;margin:16px 0 0;font-size:17px}
+.credit{font-size:11px!important;letter-spacing:.16em;text-transform:uppercase;opacity:.75;margin:14px 0 0!important}
+.rule{display:block;width:120px;height:4px;background:var(--accent);margin:20px 0 0}
+
+/* sections */
+section{padding-block:clamp(56px,8vw,104px);scroll-margin-top:90px}
+.eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.22em;font-size:13px;color:var(--muted);margin:0 0 10px}
+h2{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:clamp(30px,4vw,48px);line-height:1.02;margin:0;text-wrap:balance;max-width:20ch}
+.lead{font-size:18px;max-width:62ch;margin:18px 0 0;color:var(--fg)}
+h3{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:22px;margin:0}
+
+/* figures band */
+.figures{border-block:1px solid var(--line)}
+.figures .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-block:28px}
+.fig b{display:block;font-family:var(--display);font-size:44px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.fig small{color:var(--muted);font-size:14px}
+
+/* principles */
+.principles{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:44px}
+.principles article{display:flex;flex-direction:column;gap:12px;min-width:0}
+.principles .ph{aspect-ratio:4/5;max-width:100%}
+.principles p{margin:0;color:var(--muted);font-size:15px}
+.note{margin-top:40px;padding:18px 20px;border-left:4px solid var(--accent);background:var(--surface);max-width:70ch}
+.note p{margin:0}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 28px;margin-top:44px}
+.project{display:flex;flex-direction:column;gap:14px;min-width:0}
+.project .ph{aspect-ratio:3/2;max-width:100%}
+.project .tag{font-family:var(--display);text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:var(--accent)}
+.project dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:14px}
+.project dt{color:var(--muted)}
+.project dd{margin:0}
+.project p{margin:0;color:var(--muted);font-size:15px}
+.featured{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:start}
+.featured .ph{aspect-ratio:16/10}
+.featured-text{display:flex;flex-direction:column;gap:14px;min-width:0}
+.featured h3{font-size:28px}
+@media (max-width:900px){.featured{grid-template-columns:1fr}}
+.project .shot{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;max-width:100%}
+.project .shot-credit{font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.more{margin-top:40px;color:var(--muted);font-size:15px}
+
+/* transmettre */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.split .ph{aspect-ratio:1/1;max-width:100%}
+.list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:18px}
+.list li{border-top:1px solid var(--line);padding-top:14px}
+.list b{display:block;font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:17px;font-weight:600}
+.list span{color:var(--muted);font-size:15px}
+
+/* cabinet */
+.dark{background:var(--band);color:var(--band-fg)}
+.dark .eyebrow{color:#9a958d}
+.dark .lead{color:#e4e0da}
+.team{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:44px}
+.member{display:flex;flex-direction:column;gap:8px;min-width:0}
+.member .ph{aspect-ratio:3/4;max-width:100%;filter:grayscale(1)}
+.member b{font-family:var(--display);text-transform:uppercase;letter-spacing:.05em;font-size:17px;font-weight:600}
+.member small{color:#a7a29a;font-size:13px;line-height:1.4}
+
+.founder{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:40px;margin-top:44px;align-items:start}
+.founder .ph{aspect-ratio:3/4;max-width:100%;filter:grayscale(1)}
+.founder-text{display:grid;gap:14px;max-width:60ch}
+.founder-text b{font-family:var(--display);text-transform:uppercase;letter-spacing:.05em;font-size:22px;font-weight:600}
+.founder-text p{margin:0;color:#d8d3cc}
+@media (max-width:620px){.founder{grid-template-columns:1fr}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.coords{display:grid;gap:18px;margin-top:28px;font-size:17px}
+.coords small{display:block;font-family:var(--display);text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--muted)}
+form{display:grid;gap:14px}
+label{font-size:13px;color:var(--muted);display:grid;gap:6px}
+input,select,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);padding:11px 12px;border-radius:0;width:100%}
+textarea{min-height:120px;resize:vertical}
+button{font-family:var(--display);text-transform:uppercase;letter-spacing:.16em;font-size:15px;background:var(--fg);color:var(--bg);border:0;padding:14px 22px;cursor:pointer;justify-self:start}
+button:hover{background:var(--accent);color:#fff}
+.sent{color:var(--muted);font-size:14px;margin:0}
+
+footer{border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-block:24px;font-size:13px;color:var(--muted)}
+
+@media (max-width:900px){
+  .principles{grid-template-columns:repeat(2,1fr)}
+  .team{grid-template-columns:repeat(3,1fr)}
+  .split,.contact{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  nav ul{display:none}
+  .projects,.principles{grid-template-columns:1fr}
+  .team{grid-template-columns:repeat(2,1fr)}
+  .figures .wrap{grid-template-columns:1fr;gap:12px}
+  .fig b{font-size:36px}
+}
+</style>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#accueil" aria-label="IRIZI Architecte, accueil"><img src="logo/logo-irizi-architecte.png" alt="IRIZI Architecte"></a>
+    <nav aria-label="Navigation principale"><ul>
+      <li><a href="#demarche">Démarche</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#transmettre">Transmettre</a></li>
+      <li><a href="#cabinet">Cabinet</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero" id="accueil">
+    <div class="ph"><span>Photo plein écran · Gîte en pisé (vidéo drone plus tard)</span></div>
+    <div class="hero-text"><div class="wrap">
+      <h1>Construire avec la terre, la pierre et le climat</h1>
+      <span class="rule" aria-hidden="true"></span>
+      <p class="credit">Vue aérienne · IRIZI Architecte</p>
+      <p>Cabinet d'architecture à Agadir depuis 2009. Conception bioclimatique, matériaux locaux, projets privés et publics.</p>
+    </div></div>
+  </div>
+
+  <div class="figures"><div class="wrap">
+    <div class="fig"><b>15+</b><small>années de pratique à Agadir</small></div>
+    <div class="fig"><b>40+</b><small>projets réalisés ou en cours</small></div>
+    <div class="fig"><b>HQE</b><small>formation Haute Qualité Environnementale, 2025</small></div>
+  </div></div>
+
+  <section id="demarche"><div class="wrap">
+    <p class="eyebrow">Notre démarche</p>
+    <h2>Une architecture pensée pour son site, son climat et ses habitants</h2>
+    <p class="lead">Chaque bâtiment cherche à concilier performance énergétique, confort des usagers et respect de l'environnement, avec les ressources et les savoir-faire du territoire.</p>
+    <div class="principles">
+      <article><div class="ph"><span>Mur en pisé</span></div><h3>Matériaux locaux</h3><p>Pisé, pierre, bois et liège : des ressources du Sud marocain qui réduisent l'empreinte du chantier.</p></article>
+      <article><div class="ph"><span>Façade sud</span></div><h3>Bioclimatique</h3><p>Ouvertures au sud, façade nord opaque, lumière naturelle et ventilation passive.</p></article>
+      <article><div class="ph"><span>Isolation liège</span></div><h3>Inertie et isolation</h3><p>Murs porteurs en pisé pour le déphasage thermique, isolation extérieure et toiture en liège.</p></article>
+      <article><div class="ph"><span>Eau de pluie</span></div><h3>Eau et énergie</h3><p>Récupération des eaux de pluie, toilettes sèches, préparation au solaire thermique et photovoltaïque.</p></article>
+    </div>
+    <div class="note"><p>Formé en Haute Qualité Environnementale (HQE) en 2025 et docteur en écologie (Université Mohammed V, 2021), Ali Irizi relie l'architecture à la connaissance du vivant.</p></div>
+  </div></section>
+
+  <section id="projets" style="background:var(--surface)"><div class="wrap">
+    <p class="eyebrow">Projets</p>
+    <h2>Des projets qui donnent le ton</h2>
+    <div class="projects">
+      <article class="project featured">
+        <div class="ph"><span>Taliouine · vue aérienne du chantier</span></div>
+        <div class="featured-text">
+          <span class="tag">Matériaux locaux · Associatif · En chantier</span>
+          <h3>Locaux de l'association Tawnza, Taliouine</h3>
+          <dl><dt>Lieu</dt><dd>Douar Douzrou, commune de Taliouine</dd><dt>Maître d'ouvrage</dt><dd>Association Tawnza</dd><dt>État</dt><dd>Chantier en cours, par phases</dd></dl>
+          <p>Centre communautaire avec préscolaire, crèche, salle de formation et ateliers de production. Le plus important chantier du cabinet en matériaux locaux : maçonnerie en adobes et dispositions parasismiques propres à la construction en terre.</p>
+          <p>Réalisé dans le cadre du projet PROCAMM, mené en partenariat avec la Coopération suisse au Maroc. Le chantier accueille aussi des chantiers-écoles pour les étudiants de l'ENA Agadir.</p>
+        </div>
+      </article>
+      <article class="project">
+        <div class="ph"><span>Gite_Pise_01</span></div>
+        <span class="tag">Écoconstruction · Privé</span>
+        <h3>Gîte touristique en pisé</h3>
+        <dl><dt>Lieu</dt><dd>Entre Agadir et Taroudant</dd><dt>État</dt><dd>Finitions en cours</dd></dl>
+        <p>Gîte passif aux murs porteurs en pisé, pierre et charpente bois. Grandes ouvertures au sud, toilettes sèches, attentes pour le solaire.</p>
+      </article>
+      <article class="project">
+        <div class="ph"><span>Log_Medic_Pise_01</span></div>
+        <span class="tag">Matériaux locaux · Public</span>
+        <h3>Logements du personnel médical</h3>
+        <dl><dt>Lieu</dt><dd>Issafen, Tagmout, Aït Ouabli (Tata)</dd><dt>État</dt><dd>Livrés en 2023</dd></dl>
+        <p>Trois logements types pour la Province de Tata, en pisé ou en pierre selon le site, avec toiture isolée et éclairage naturel.</p>
+      </article>
+      <article class="project">
+        <div class="ph"><span>Internat_01</span></div>
+        <span class="tag">Pierre locale · Public</span>
+        <h3>Internat de Sebt Ennabour</h3>
+        <dl><dt>Lieu</dt><dd>Sebt Ennabour, province de Guelmim</dd><dt>État</dt><dd>Achevé en 2020</dd></dl>
+        <p>Internat pour l'Académie de Guelmim, dont une partie de l'enveloppe est doublée en maçonnerie de pierre locale pour renforcer l'isolation.</p>
+      </article>
+      <article class="project">
+        <div class="ph"><span>Dar_Oumouma_01</span></div>
+        <span class="tag">À compléter</span>
+        <h3>Dar Al Oumouma</h3>
+        <dl><dt>Lieu</dt><dd>À préciser</dd><dt>État</dt><dd>À préciser</dd></dl>
+        <p>Description à fournir : programme, maître d'ouvrage, année et solutions mises en œuvre.</p>
+      </article>
+    </div>
+    <p class="more">D'autres projets rejoindront cette page au fil du temps, ainsi que la liste des références publiques et industrielles.</p>
+  </div></section>
+
+  <section id="transmettre"><div class="wrap split">
+    <div>
+      <p class="eyebrow">Transmettre</p>
+      <h2>Partager ce que les chantiers nous apprennent</h2>
+      <p class="lead">L'écoconstruction n'avance que si ses savoir-faire se transmettent. Ali Irizi enseigne depuis 2021 à l'École Nationale d'Architecture d'Agadir.</p>
+      <ul class="list">
+        <li><b>Enseignement</b><span>Cours et encadrement à l'ENA Agadir depuis 2021.</span></li>
+        <li><b>Chantiers-écoles</b><span>À Taliouine, les étudiants de l'ENA Agadir observent la maçonnerie en adobes, la toiture et les dispositions parasismiques de la construction en terre. Deuxième session le 6 octobre 2026. <a href="https://www.facebook.com/share/1Dzko4tq4k/" target="_blank" rel="noopener">Voir la publication de l'ENA Agadir</a></span></li>
+        <li><b>Livrets de vulgarisation</b><span>Contribution aux livrets sur la construction en pisé destinés aux artisans et aux auto-constructeurs ruraux, en préparation.</span></li>
+        <li><b>Engagement</b><span>Président de l'association Akal à Agadir, dédiée à l'écoconstruction, membre du Conseil régional de l'Ordre des architectes du Sud.</span></li>
+      </ul>
+    </div>
+    <div class="ph"><span>Photo d'atelier ou de chantier</span></div>
+  </div></section>
+
+  <section id="cabinet" class="dark"><div class="wrap">
+    <p class="eyebrow">Le cabinet</p>
+    <h2>Fondé en 2009 à Agadir</h2>
+    <p class="lead">Fondé par l'architecte Ali Irizi, diplômé de l'École d'architecture de Paris-La Villette, le cabinet est devenu la société Cabinet d'architecture Irizi en 2017. Il conçoit des maisons individuelles, des projets d'écoconstruction et des équipements publics.</p>
+    <div class="founder">
+      <div class="ph"><span>Portrait d'Ali Irizi</span></div>
+      <div class="founder-text">
+        <b>Ali Irizi, architecte</b>
+        <p>Diplômé de Paris-La Villette (2005), DUT de génie civil (Reims, 1998), docteur en écologie (Rabat, 2021). Il suit personnellement chaque projet, de l'esquisse au chantier.</p>
+        <p>Pour chaque projet, il s'entoure des compétences nécessaires : bureaux d'études, entreprises et artisans de la construction en terre et en pierre.</p>
+        <p>Photographe et pilote de drone, il documente lui-même les sites et les chantiers, au sol comme depuis le ciel. Toutes les images de ce site sont réalisées par le cabinet.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="contact"><div class="wrap contact">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h2>Parlons de votre projet</h2>
+      <div class="coords">
+        <div><small>Adresse</small>77, avenue Abdellah Guenoun, Cité Salam, Agadir</div>
+        <div><small>Téléphone</small>06 71 48 22 00</div>
+        <div><small>Email</small>iriziarchi@gmail.com</div>
+      </div>
+    </div>
+    <form id="contact-form">
+      <label for="f-name">Nom<input id="f-name" name="name" required></label>
+      <label for="f-email">Email<input id="f-email" name="email" type="email" required></label>
+      <label for="f-type">Type de projet<select id="f-type" name="type"><option>Maison individuelle</option><option>Écoconstruction</option><option>Équipement public</option><option>Enseignement ou intervention</option><option>Prises de vue et suivi de chantier</option><option>Autre</option></select></label>
+      <label for="f-msg">Message<textarea id="f-msg" name="message"></textarea></label>
+      <button type="submit">Envoyer</button>
+      <p class="sent" id="f-sent" hidden>Maquette : le formulaire sera relié à votre email lors de la mise en ligne.</p>
+    </form>
+  </div></section>
+</main>
+
+<footer><div class="wrap"><span>© IRIZI Architecte · Agadir, Maroc</span><span>Photographies et vues aériennes : IRIZI Architecte</span></div></footer>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit',function(e){e.preventDefault();document.getElementById('f-sent').hidden=false;});
+</script>
