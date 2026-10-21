@@ -87,6 +87,9 @@ h3{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 .project p{margin:0;color:var(--muted);font-size:15px}
 .featured{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:start}
 .featured .ph{aspect-ratio:16/10}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;min-width:0}
+.gallery .photo{display:block;width:100%;aspect-ratio:3/2;object-fit:cover}
+.gallery .main{grid-column:1/-1;aspect-ratio:16/10}
 .featured-text{display:flex;flex-direction:column;gap:14px;min-width:0}
 .featured h3{font-size:28px}
 @media (max-width:900px){.featured{grid-template-columns:1fr}}
@@ -198,7 +201,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
     <h2>Des projets qui donnent le ton</h2>
     <div class="projects">
       <article class="project featured">
-        <div class="ph"><span>Taliouine · vue aérienne du chantier</span></div>
+        <div class="gallery">
+          <img class="photo main" src="photos/taliouine/taliouine-chantier-ecole.jpg" alt="Chantier-école de Taliouine : étudiants de l'ENA Agadir et artisans autour des fondations, adobes en séchage et montagnes en arrière-plan">
+          <img class="photo" src="photos/taliouine/taliouine-adobes-moulage.jpg" alt="Étudiantes moulant des adobes en terre et paille avec les artisans" loading="lazy">
+          <img class="photo" src="photos/taliouine/taliouine-adobes-sechage.jpg" alt="Démoulage des adobes, mur de clôture en pierre et terre" loading="lazy">
+          <img class="photo" src="photos/taliouine/taliouine-equipe-murs.jpg" alt="Artisans et étudiants réunis entre les murs en pierre et en terre du chantier" loading="lazy">
+        </div>
         <div class="featured-text">
           <span class="tag">Matériaux locaux · Associatif · En chantier</span>
           <h3>Locaux de l'association Tawnza, Taliouine</h3>
