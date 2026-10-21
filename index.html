@@ -93,6 +93,7 @@ h3{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;min-width:0}
 .gallery .photo{display:block;width:100%;aspect-ratio:3/2;object-fit:cover}
 .gallery .main{grid-column:1/-1;aspect-ratio:16/10}
+.gallery .photo[hidden]{display:none}
 .featured-text{display:flex;flex-direction:column;gap:14px;min-width:0}
 .featured h3{font-size:28px}
 @media (max-width:900px){.featured{grid-template-columns:1fr}}
@@ -237,7 +238,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
         <p>Gîte passif aux murs porteurs en pisé, pierre et charpente bois. Grandes ouvertures au sud, toilettes sèches, attentes pour le solaire.</p>
       </article>
       <article class="project">
-        <div class="ph"><span>Log_Medic_Pise_01</span></div>
+        <div class="gallery">
+          <img class="photo main" src="photos/tata/tata-pierre-escalier.jpg" alt="Logement du personnel médical en pierre, avec son escalier d'entrée, province de Tata" loading="lazy">
+          <img class="photo" src="photos/tata/tata-pierre-fenetre.jpg" alt="Fenêtre à encadrement blanc et volets en bois dans un mur en pierre" loading="lazy">
+          <img class="photo" src="photos/tata/tata-pierre-facade.jpg" alt="Façade d'entrée du logement en pierre" loading="lazy">
+          <img class="photo" src="photos/tata/tata-pise-facade.jpg" alt="Logement en pisé enduit sur soubassement en pierre, sous un ciel bleu" loading="lazy">
+          <img class="photo" src="photos/tata/tata-pierre-terrasse.jpg" alt="Logement en pierre avec terrasse d'entrée" loading="lazy" hidden>
+          <img class="photo" src="photos/tata/tata-pise-perspective.jpg" alt="Logement en pisé vu en perspective, montagnes au loin" loading="lazy" hidden>
+        </div>
         <span class="tag">Matériaux locaux · Public</span>
         <h3>Logements du personnel médical</h3>
         <dl><dt>Lieu</dt><dd>Issafen, Tagmout, Aït Ouabli (Tata)</dd><dt>État</dt><dd>Livrés en 2023</dd></dl>
