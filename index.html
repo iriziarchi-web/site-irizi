@@ -154,6 +154,16 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
   .figures .wrap{grid-template-columns:1fr;gap:12px}
   .fig b{font-size:36px}
 }
+.photo{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:rgba(10,9,8,.94);padding:48px 16px}
+.lb[hidden]{display:none}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.lb button{position:absolute;background:none;border:0;color:#fff;font-size:34px;line-height:1;padding:12px 16px;cursor:pointer;opacity:.8}
+.lb button:hover,.lb button:focus-visible{opacity:1}
+.lb .lb-close{top:6px;right:8px}
+.lb .lb-prev{left:4px;top:50%;transform:translateY(-50%)}
+.lb .lb-next{right:4px;top:50%;transform:translateY(-50%)}
+.lb .lb-count{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#bbb;font-size:13px;letter-spacing:.08em}
 </style>
 
 <header>
@@ -206,9 +216,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
       <article class="project featured">
         <div class="gallery">
           <img class="photo main" src="photos/taliouine/taliouine-chantier-ecole.jpg" alt="Chantier-école de Taliouine : étudiants de l'ENA Agadir et artisans autour des fondations, adobes en séchage et montagnes en arrière-plan">
-          <img class="photo" src="photos/taliouine/taliouine-adobes-moulage.jpg" alt="Étudiantes moulant des adobes en terre et paille avec les artisans" loading="lazy">
-          <img class="photo" src="photos/taliouine/taliouine-adobes-sechage.jpg" alt="Démoulage des adobes, mur de clôture en pierre et terre" loading="lazy">
-          <img class="photo" src="photos/taliouine/taliouine-equipe-murs.jpg" alt="Artisans et étudiants réunis entre les murs en pierre et en terre du chantier" loading="lazy">
+          <img class="photo" src="photos/taliouine/taliouine-adobes-moulage.jpg" data-full="photos/taliouine/taliouine-adobes-moulage-grand.jpg" alt="Étudiantes moulant des adobes en terre et paille avec les artisans" loading="lazy">
+          <img class="photo" src="photos/taliouine/taliouine-adobes-sechage.jpg" data-full="photos/taliouine/taliouine-adobes-sechage-grand.jpg" alt="Démoulage des adobes, mur de clôture en pierre et terre" loading="lazy">
+          <img class="photo" src="photos/taliouine/taliouine-equipe-murs.jpg" data-full="photos/taliouine/taliouine-equipe-murs-grand.jpg" alt="Artisans et étudiants réunis entre les murs en pierre et en terre du chantier" loading="lazy">
         </div>
         <div class="featured-text">
           <span class="tag">Matériaux locaux · Associatif · En chantier</span>
@@ -304,6 +314,29 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 
 <footer><div class="wrap"><span>© IRIZI Architecte · Agadir, Maroc</span><span>Photographies des projets et vues aériennes : IRIZI Architecte</span></div></footer>
 
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo agrandie">
+  <img alt="">
+  <button class="lb-close" type="button" aria-label="Fermer">×</button>
+  <button class="lb-prev" type="button" aria-label="Photo précédente">‹</button>
+  <button class="lb-next" type="button" aria-label="Photo suivante">›</button>
+  <p class="lb-count"></p>
+</div>
+
 <script>
 document.getElementById('contact-form').addEventListener('submit',function(e){e.preventDefault();var f=this;fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()}).then(function(r){if(!r.ok)throw r;f.reset();document.getElementById('f-sent').hidden=false;}).catch(function(){alert('Envoi impossible pour le moment. Merci de réessayer plus tard.');});});
+(function(){
+  var lb=document.getElementById('lb'),img=lb.querySelector('img'),count=lb.querySelector('.lb-count'),prev=lb.querySelector('.lb-prev'),next=lb.querySelector('.lb-next'),group=[],i=0,last=null;
+  function show(){var p=group[i];img.src=p.dataset.full||p.currentSrc||p.src;img.alt=p.alt;var many=group.length>1;prev.hidden=next.hidden=count.hidden=!many;count.textContent=(i+1)+' / '+group.length;}
+  function open(p){var g=p.closest('.gallery');group=g?[].slice.call(g.querySelectorAll('.photo')):[p];i=group.indexOf(p);last=p;show();lb.hidden=false;document.body.style.overflow='hidden';lb.querySelector('.lb-close').focus();}
+  function close(){lb.hidden=true;img.src='';document.body.style.overflow='';if(last)last.focus();}
+  function go(d){i=(i+d+group.length)%group.length;show();}
+  [].forEach.call(document.querySelectorAll('img.photo'),function(p){p.tabIndex=0;p.addEventListener('click',function(){open(p);});p.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(p);}});});
+  lb.querySelector('.lb-close').addEventListener('click',close);
+  prev.addEventListener('click',function(e){e.stopPropagation();go(-1);});
+  next.addEventListener('click',function(e){e.stopPropagation();go(1);});
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  document.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')close();else if(e.key==='ArrowLeft')go(-1);else if(e.key==='ArrowRight')go(1);});
+  var x0=null;lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+  lb.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)go(dx<0?1:-1);x0=null;});
+})();
 </script>
