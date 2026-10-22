@@ -52,6 +52,7 @@ nav a:hover{color:var(--band-fg)}
 /* hero */
 .hero{position:relative}
 .hero .ph{height:min(72vh,640px);min-height:380px}
+.hero .film{display:block;width:100%;height:min(72vh,640px);min-height:380px;object-fit:cover;background:#2a2420}
 .hero-text{position:absolute;inset:auto 0 0 0;padding-block:48px;background:linear-gradient(transparent,rgba(0,0,0,.55))}
 .hero h1{font-family:var(--display);font-weight:600;text-transform:uppercase;color:#fff;font-size:clamp(38px,6.4vw,84px);line-height:.98;letter-spacing:.01em;margin:0;max-width:14ch;text-wrap:balance}
 .hero p{color:#efe9e1;max-width:56ch;margin:16px 0 0;font-size:17px}
@@ -94,7 +95,6 @@ h3{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 .gallery .photo{display:block;width:100%;aspect-ratio:3/2;object-fit:cover}
 .gallery .main{grid-column:1/-1;aspect-ratio:16/10}
 .gallery .photo[hidden]{display:none}
-.gallery .film{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#000}
 .featured-text{display:flex;flex-direction:column;gap:14px;min-width:0}
 .featured h3{font-size:28px}
 @media (max-width:900px){.featured{grid-template-columns:1fr}}
@@ -184,7 +184,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 
 <main>
   <div class="hero" id="accueil">
-    <div class="ph"><span>Photo plein écran · Gîte en pisé (vidéo drone plus tard)</span></div>
+    <video class="film" src="videos/taliouine-chantier.mp4" poster="videos/taliouine-chantier-affiche.jpg" autoplay muted loop playsinline preload="auto" aria-label="Survol du chantier de Taliouine : modules en pierre et en terre au pied des montagnes"></video>
     <div class="hero-text"><div class="wrap">
       <h1>Construire avec la terre, la pierre et le climat</h1>
       <span class="rule" aria-hidden="true"></span>
@@ -218,11 +218,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
     <div class="projects">
       <article class="project featured">
         <div class="gallery">
-          <video class="main film" src="videos/taliouine-chantier.mp4" poster="videos/taliouine-chantier-affiche.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Survol du chantier de Taliouine : modules en pierre et en terre, aire de séchage des adobes, montagnes autour"></video>
+          <img class="photo main" src="photos/taliouine/taliouine-chantier-ecole.jpg" alt="Chantier-école de Taliouine : étudiants de l'ENA Agadir et artisans autour des fondations, adobes en séchage et montagnes en arrière-plan">
           <img class="photo" src="photos/taliouine/taliouine-adobes-moulage.jpg" data-full="photos/taliouine/taliouine-adobes-moulage-grand.jpg" alt="Étudiantes moulant des adobes en terre et paille avec les artisans" loading="lazy">
           <img class="photo" src="photos/taliouine/taliouine-adobes-sechage.jpg" data-full="photos/taliouine/taliouine-adobes-sechage-grand.jpg" alt="Démoulage des adobes, mur de clôture en pierre et terre" loading="lazy">
           <img class="photo" src="photos/taliouine/taliouine-equipe-murs.jpg" data-full="photos/taliouine/taliouine-equipe-murs-grand.jpg" alt="Artisans et étudiants réunis entre les murs en pierre et en terre du chantier" loading="lazy">
-          <img class="photo" src="photos/taliouine/taliouine-chantier-ecole.jpg" alt="Chantier-école de Taliouine : étudiants de l'ENA Agadir et artisans autour des fondations, adobes en séchage et montagnes en arrière-plan" loading="lazy" hidden>
         </div>
         <div class="featured-text">
           <span class="tag">Matériaux locaux · Associatif · En chantier</span>
