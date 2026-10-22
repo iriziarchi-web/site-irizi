@@ -105,6 +105,8 @@ h3{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 .split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
 .split .ph{aspect-ratio:1/1;max-width:100%}
 .split .photo{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:38% 50%}
+.split .gallery .photo{aspect-ratio:3/2;object-position:50% 50%}
+.split .gallery .main{aspect-ratio:1/1;object-position:38% 50%}
 .list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:18px}
 .list li{border-top:1px solid var(--line);padding-top:14px}
 .list b{display:block;font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:17px;font-weight:600}
@@ -217,10 +219,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
     <div class="projects">
       <article class="project featured">
         <div class="gallery">
-          <img class="photo main" src="photos/taliouine/taliouine-chantier-ecole.jpg" alt="Chantier-école de Taliouine : étudiants de l'ENA Agadir et artisans autour des fondations, adobes en séchage et montagnes en arrière-plan">
-          <img class="photo" src="photos/taliouine/taliouine-adobes-moulage.jpg" data-full="photos/taliouine/taliouine-adobes-moulage-grand.jpg" alt="Étudiantes moulant des adobes en terre et paille avec les artisans" loading="lazy">
-          <img class="photo" src="photos/taliouine/taliouine-adobes-sechage.jpg" data-full="photos/taliouine/taliouine-adobes-sechage-grand.jpg" alt="Démoulage des adobes, mur de clôture en pierre et terre" loading="lazy">
-          <img class="photo" src="photos/taliouine/taliouine-equipe-murs.jpg" data-full="photos/taliouine/taliouine-equipe-murs-grand.jpg" alt="Artisans et étudiants réunis entre les murs en pierre et en terre du chantier" loading="lazy">
+          <img class="photo main" src="photos/taliouine/taliouine-drone-site.jpg" alt="Vue aérienne du chantier de Taliouine : bâtiments en pierre et en pisé, douar et ravin en arrière-plan">
+          <img class="photo" src="photos/taliouine/taliouine-pierre-chainages.jpg" alt="Murs en pierre avec chaînages en bois, sous le ciel de Taliouine" loading="lazy">
+          <img class="photo" src="photos/taliouine/taliouine-adobes-minaret.jpg" alt="Adobes en terre crue séchant au soleil, minaret et montagnes au loin" loading="lazy">
+          <img class="photo" src="photos/taliouine/taliouine-drone-plan.jpg" alt="Le chantier vu du ciel, à la verticale : plan des bâtiments et aire de séchage des adobes" loading="lazy">
+          <img class="photo" src="photos/taliouine/taliouine-visite-pise.jpg" alt="Échange sur le chantier devant les murs en pisé sur soubassement en pierre" loading="lazy" hidden>
+          <img class="photo" src="photos/taliouine/taliouine-chantier-vue.jpg" alt="Le chantier au pied des montagnes, murs en pierre et en pisé" loading="lazy" hidden>
+          <img class="photo" src="photos/taliouine/taliouine-terres.jpg" alt="Brouettes de terres et de sables de différentes couleurs pour les mélanges" loading="lazy" hidden>
+          <img class="photo" src="photos/taliouine/taliouine-drone-pierre.jpg" alt="Vue aérienne rapprochée des murs en pierre" loading="lazy" hidden>
         </div>
         <div class="featured-text">
           <span class="tag">Matériaux locaux · Associatif · En chantier</span>
@@ -289,7 +295,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
         <li><b>Engagement</b><span>Président de l'association Akal à Agadir, dédiée à l'écoconstruction, membre du Conseil régional de l'Ordre des architectes du Sud.</span></li>
       </ul>
     </div>
-    <img class="photo" src="photos/cabinet/chantier-taliouine-etudiants.jpg" alt="Ali Irizi explique le chantier en terre de Taliouine à des étudiants de l'École Nationale d'Architecture d'Agadir" loading="lazy">
+    <div class="gallery">
+      <img class="photo main" src="photos/cabinet/chantier-taliouine-etudiants.jpg" alt="Ali Irizi explique le chantier en terre de Taliouine à des étudiants de l'École Nationale d'Architecture d'Agadir" loading="lazy">
+      <img class="photo" src="photos/taliouine/taliouine-chantier-ecole.jpg" alt="Chantier-école de Taliouine : étudiants de l'ENA Agadir et artisans autour des fondations, adobes en séchage et montagnes en arrière-plan" loading="lazy">
+      <img class="photo" src="photos/taliouine/taliouine-adobes-moulage.jpg" data-full="photos/taliouine/taliouine-adobes-moulage-grand.jpg" alt="Étudiantes moulant des adobes en terre et paille avec les artisans" loading="lazy">
+      <img class="photo" src="photos/taliouine/taliouine-adobes-sechage.jpg" data-full="photos/taliouine/taliouine-adobes-sechage-grand.jpg" alt="Démoulage des adobes, mur de clôture en pierre et terre" loading="lazy">
+      <img class="photo" src="photos/taliouine/taliouine-equipe-murs.jpg" data-full="photos/taliouine/taliouine-equipe-murs-grand.jpg" alt="Artisans et étudiants réunis entre les murs en pierre et en terre du chantier" loading="lazy" hidden>
+    </div>
   </div></section>
 
   <section id="cabinet" class="dark"><div class="wrap">
