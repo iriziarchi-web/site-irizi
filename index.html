@@ -94,6 +94,7 @@ h3{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 .gallery .photo{display:block;width:100%;aspect-ratio:3/2;object-fit:cover}
 .gallery .main{grid-column:1/-1;aspect-ratio:16/10}
 .gallery .photo[hidden]{display:none}
+.gallery .film{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#000}
 .featured-text{display:flex;flex-direction:column;gap:14px;min-width:0}
 .featured h3{font-size:28px}
 @media (max-width:900px){.featured{grid-template-columns:1fr}}
@@ -217,10 +218,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
     <div class="projects">
       <article class="project featured">
         <div class="gallery">
-          <img class="photo main" src="photos/taliouine/taliouine-chantier-ecole.jpg" alt="Chantier-école de Taliouine : étudiants de l'ENA Agadir et artisans autour des fondations, adobes en séchage et montagnes en arrière-plan">
+          <video class="main film" src="videos/taliouine-chantier.mp4" poster="videos/taliouine-chantier-affiche.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Survol du chantier de Taliouine : modules en pierre et en terre, aire de séchage des adobes, montagnes autour"></video>
           <img class="photo" src="photos/taliouine/taliouine-adobes-moulage.jpg" data-full="photos/taliouine/taliouine-adobes-moulage-grand.jpg" alt="Étudiantes moulant des adobes en terre et paille avec les artisans" loading="lazy">
           <img class="photo" src="photos/taliouine/taliouine-adobes-sechage.jpg" data-full="photos/taliouine/taliouine-adobes-sechage-grand.jpg" alt="Démoulage des adobes, mur de clôture en pierre et terre" loading="lazy">
           <img class="photo" src="photos/taliouine/taliouine-equipe-murs.jpg" data-full="photos/taliouine/taliouine-equipe-murs-grand.jpg" alt="Artisans et étudiants réunis entre les murs en pierre et en terre du chantier" loading="lazy">
+          <img class="photo" src="photos/taliouine/taliouine-chantier-ecole.jpg" alt="Chantier-école de Taliouine : étudiants de l'ENA Agadir et artisans autour des fondations, adobes en séchage et montagnes en arrière-plan" loading="lazy" hidden>
         </div>
         <div class="featured-text">
           <span class="tag">Matériaux locaux · Associatif · En chantier</span>
@@ -340,6 +342,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 </div>
 
 <script>
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.querySelectorAll('video.film').forEach(function(v){v.removeAttribute('autoplay');v.pause();v.controls=true;});
 document.getElementById('contact-form').addEventListener('submit',function(e){e.preventDefault();var f=this;fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()}).then(function(r){if(!r.ok)throw r;f.reset();document.getElementById('f-sent').hidden=false;}).catch(function(){alert('Envoi impossible pour le moment. Merci de réessayer plus tard.');});});
 (function(){
   var lb=document.getElementById('lb'),img=lb.querySelector('img'),count=lb.querySelector('.lb-count'),prev=lb.querySelector('.lb-prev'),next=lb.querySelector('.lb-next'),group=[],i=0,last=null;
