@@ -1,4 +1,9 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>IRIZI Architecte</title>
+<link rel="canonical" href="https://www.iriziarchi.com/">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="logo/icone-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -25,7 +30,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--band)}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 a{color:inherit}
@@ -329,8 +334,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
         <div><small>Email</small>iriziarchi@gmail.com</div>
       </div>
     </div>
-    <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="site-web">
-      <input type="hidden" name="form-name" value="contact"><p hidden><label>Ne pas remplir<input name="site-web"></label></p>
+    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="6190e206-f8e1-460b-b100-ef916aad69d8">
+      <input type="hidden" name="subject" value="Message du site IRIZI Architecte"><input type="hidden" name="from_name" value="Site IRIZI Architecte">
+      <p hidden><label>Ne pas remplir<input type="checkbox" name="botcheck" tabindex="-1"></label></p>
       <label for="f-name">Nom<input id="f-name" name="name" required></label>
       <label for="f-email">Email<input id="f-email" name="email" type="email" required></label>
       <label for="f-type">Type de projet<select id="f-type" name="type"><option>Maison individuelle</option><option>Écoconstruction</option><option>Lotissement</option><option>Enseignement ou intervention</option><option>Prises de vue et suivi de chantier</option><option>Autre</option></select></label>
@@ -353,7 +360,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 
 <script>
 if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.querySelectorAll('video.film').forEach(function(v){v.removeAttribute('autoplay');v.pause();v.controls=true;});
-document.getElementById('contact-form').addEventListener('submit',function(e){e.preventDefault();var f=this;fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()}).then(function(r){if(!r.ok)throw r;f.reset();document.getElementById('f-sent').hidden=false;}).catch(function(){alert('Envoi impossible pour le moment. Merci de réessayer plus tard.');});});
+document.getElementById('contact-form').addEventListener('submit',function(e){e.preventDefault();var f=this;fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){return r.json();}).then(function(d){if(!d.success)throw d;f.reset();document.getElementById('f-sent').hidden=false;}).catch(function(){alert('Envoi impossible pour le moment. Merci de réessayer plus tard.');});});
 (function(){
   var lb=document.getElementById('lb'),img=lb.querySelector('img'),count=lb.querySelector('.lb-count'),prev=lb.querySelector('.lb-prev'),next=lb.querySelector('.lb-next'),group=[],i=0,last=null;
   function show(){var p=group[i];img.src=p.dataset.full||p.currentSrc||p.src;img.alt=p.alt;var many=group.length>1;prev.hidden=next.hidden=count.hidden=!many;count.textContent=(i+1)+' / '+group.length;}
