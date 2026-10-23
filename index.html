@@ -45,6 +45,12 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 nav ul{display:flex;flex-wrap:wrap;gap:6px 22px;list-style:none;margin:0;padding:0}
 nav a{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:14px;text-decoration:none;color:#bdb8b0}
 nav a:hover{color:var(--band-fg)}
+.menu-btn,.menu-btn:hover,.menu-btn:focus,.menu-btn:active{background:none}
+.menu-btn{display:none;border:0;padding:12px;margin-right:-12px;cursor:pointer;color:var(--band-fg)}
+.menu-btn span{display:block;width:26px;height:2px;background:currentColor;margin:6px 0;transition:transform .25s ease,opacity .25s ease}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 
 /* photo placeholder */
 .ph{position:relative;overflow:hidden;background:
@@ -157,7 +163,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
   .split,.contact{grid-template-columns:1fr}
 }
 @media (max-width:620px){
-  nav ul{display:none}
+  header .wrap{justify-content:flex-start}
+  .menu-btn{display:block;margin-left:auto}
+  nav ul{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--band);padding:4px 16px 18px;border-top:1px solid rgba(255,255,255,.12)}
+  nav ul.open{display:flex}
+  nav li a{display:block;padding:14px 0;font-size:16px;border-bottom:1px solid rgba(255,255,255,.08)}
   .projects,.principles{grid-template-columns:1fr}
   .team{grid-template-columns:repeat(2,1fr)}
   .figures .wrap{grid-template-columns:1fr;gap:12px}
@@ -179,7 +189,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 <header>
   <div class="wrap">
     <a class="brand" href="#accueil" aria-label="IRIZI Architecte, accueil"><img src="logo/logo-irizi-architecte.png" alt="IRIZI Architecte"></a>
-    <nav aria-label="Navigation principale"><ul>
+    <button class="menu-btn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <nav aria-label="Navigation principale"><ul id="menu">
       <li><a href="#demarche">Démarche</a></li>
       <li><a href="#projets">Projets</a></li>
       <li><a href="#transmettre">Transmettre</a></li>
@@ -359,6 +370,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 </div>
 
 <script>
+(function(){var b=document.querySelector('.menu-btn'),m=document.getElementById('menu');if(!b||!m)return;function set(o){m.classList.toggle('open',o);b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Fermer le menu':'Ouvrir le menu');}
+b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true');});
+m.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});})();
 if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.querySelectorAll('video.film').forEach(function(v){v.removeAttribute('autoplay');v.pause();v.controls=true;});
 document.getElementById('contact-form').addEventListener('submit',function(e){e.preventDefault();var f=this;fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){return r.json();}).then(function(d){if(!d.success)throw d;f.reset();document.getElementById('f-sent').hidden=false;}).catch(function(){alert('Envoi impossible pour le moment. Merci de réessayer plus tard.');});});
 (function(){
