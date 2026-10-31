@@ -20,6 +20,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="logo/icone-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preload" as="image" href="videos/taliouine-chantier-affiche.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap">
 <style>
@@ -226,7 +227,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 
 <main>
   <div class="hero" id="accueil">
-    <video class="film" src="videos/taliouine-chantier.mp4" poster="videos/taliouine-chantier-affiche.jpg" autoplay muted loop playsinline preload="auto" aria-label="Survol du chantier de Taliouine : modules en pierre et en terre au pied des montagnes"></video>
+    <video class="film" src="videos/taliouine-chantier.mp4" poster="videos/taliouine-chantier-affiche.jpg" muted loop playsinline preload="none" aria-label="Survol du chantier de Taliouine : modules en pierre et en terre au pied des montagnes"></video>
     <div class="hero-text"><div class="wrap">
       <h1>Construire avec la terre, la pierre et le climat</h1>
       <span class="rule" aria-hidden="true"></span>
@@ -289,10 +290,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
       </article>
       <article class="project">
         <div class="gallery">
-          <img class="photo main" src="photos/gite/gite-patio.jpg" alt="Patio du gîte en pisé, arcs et galeries" loading="lazy">
-          <img class="photo" src="photos/gite/gite-pise-banchage-nb.jpg" alt="Artisan damant la terre au sommet d'un mur en pisé" loading="lazy">
-          <img class="photo" src="photos/gite/gite-plafond-roseaux.jpg" alt="Plafond en bois et roseaux à motifs géométriques" loading="lazy">
-          <img class="photo" src="photos/gite/gite-chambre.jpg" alt="Chambre avec plafond en bois, placards à persiennes et soubassement en brique" loading="lazy">
+          <img class="photo main" src="photos/gite/gite-patio.jpg" srcset="photos/gite/gite-patio-800.jpg 800w, photos/gite/gite-patio.jpg 1488w" sizes="(max-width:900px) 100vw, 50vw" data-full="photos/gite/gite-patio.jpg" alt="Patio du gîte en pisé, arcs et galeries" loading="lazy">
+          <img class="photo" src="photos/gite/gite-pise-banchage-nb-800.jpg" data-full="photos/gite/gite-pise-banchage-nb.jpg" alt="Artisan damant la terre au sommet d'un mur en pisé" loading="lazy">
+          <img class="photo" src="photos/gite/gite-plafond-roseaux-800.jpg" data-full="photos/gite/gite-plafond-roseaux.jpg" alt="Plafond en bois et roseaux à motifs géométriques" loading="lazy">
+          <img class="photo" src="photos/gite/gite-chambre-800.jpg" data-full="photos/gite/gite-chambre.jpg" alt="Chambre avec plafond en bois, placards à persiennes et soubassement en brique" loading="lazy">
           <img class="photo" src="photos/gite/gite-pise-chantier.jpg" alt="Murs en pisé et soubassements en pierre au soleil couchant, pendant le chantier" loading="lazy" hidden>
           <img class="photo" src="photos/gite/gite-charpente.jpg" alt="Charpente en bois posée sur les murs en pisé" loading="lazy" hidden>
           <img class="photo" src="photos/gite/gite-brique-detail.jpg" alt="Détail du soubassement en brique de terre cuite" loading="lazy" hidden>
@@ -422,7 +423,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true');});
 m.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});})();
-if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.querySelectorAll('video.film').forEach(function(v){v.removeAttribute('autoplay');v.pause();v.controls=true;});
+document.querySelectorAll('video.film').forEach(function(v){if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.controls=true;return;}function go(){v.preload='auto';v.play().catch(function(){});}if(document.readyState==='complete')go();else addEventListener('load',go);});
 document.getElementById('contact-form').addEventListener('submit',function(e){e.preventDefault();var f=this;fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){return r.json();}).then(function(d){if(!d.success)throw d;f.reset();document.getElementById('f-sent').hidden=false;}).catch(function(){alert('Envoi impossible pour le moment. Merci de réessayer plus tard.');});});
 (function(){
   var lb=document.getElementById('lb'),img=lb.querySelector('img'),count=lb.querySelector('.lb-count'),prev=lb.querySelector('.lb-prev'),next=lb.querySelector('.lb-next'),group=[],i=0,last=null;
