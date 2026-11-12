@@ -215,6 +215,22 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 .pj-gal .big{grid-column:1/-1;aspect-ratio:16/9}
 @media (max-width:620px){.pj-gal{grid-template-columns:1fr 1fr}}
 .page .topic{margin-top:36px;padding-top:36px;min-height:0}.page .topic h2{font-size:30px}
+/* diaporama d'ouverture */
+.slides{position:relative;height:min(calc(100svh - 84px),100vw);min-height:340px;background:#14110f;overflow:hidden;color:#fff}
+.slides figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.4s ease;pointer-events:none}
+.slides figure.on{opacity:1;pointer-events:auto}
+.slides img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04);transition:transform 7s ease-out}
+.slides figure.on img{transform:scale(1)}
+.slides figcaption{position:absolute;left:0;right:0;bottom:0;padding:56px max(16px,calc((100vw - 1200px)/2 + 24px)) 26px;background:linear-gradient(transparent,rgba(0,0,0,.5));font-size:14px;letter-spacing:.03em;color:#efe9e1;display:flex;justify-content:space-between;gap:16px;align-items:flex-end}
+.slides .count{font-family:var(--display);letter-spacing:.12em;white-space:nowrap;color:#fff}
+.slides button{position:absolute;top:0;bottom:0;width:22%;max-width:220px;background:none;border:0;color:#fff;cursor:pointer;font-size:56px;line-height:1;opacity:0;transition:opacity .3s ease;z-index:2}
+.slides .prev{left:0;text-align:left;padding-left:20px}.slides .next{right:0;text-align:right;padding-right:20px}
+.slides:hover button,.slides button:focus-visible{opacity:.85}
+.slides .bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);z-index:3}
+.slides .bar.run{width:100%;transition:width linear}
+@media (hover:none){.slides button{opacity:.7;font-size:32px}}
+@media (max-width:620px){.slides figcaption{font-size:13px;padding-bottom:18px}.slides .cap{display:none}}
+@media (prefers-reduced-motion:reduce){.slides figure,.slides img{transition:none}.slides img{transform:none}}
 </style>
 
 <header>
@@ -230,6 +246,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
     </ul></nav>
   </div>
 </header>
+
+<section class="slides" aria-roledescription="carrousel" aria-label="Le chantier de Taliouine en images">
+  <figure class="on"><img src="photos/taliouine/taliouine-ouverture-linteau.jpg" srcset="photos/taliouine/taliouine-ouverture-linteau-1200.jpg 1200w, photos/taliouine/taliouine-ouverture-linteau.jpg 2400w" sizes="100vw" alt="Vue à travers une ouverture à linteau en bois : murs en pisé, artisans sur le mur et montagne en arrière-plan" fetchpriority="high"><figcaption><span class="cap">Une ouverture en pisé et son linteau en bois, face à la montagne</span><span class="count">01 / 05</span></figcaption></figure>
+  <figure><img src="photos/taliouine/taliouine-pise-coffrage-nb.jpg" srcset="photos/taliouine/taliouine-pise-coffrage-nb-1200.jpg 1200w, photos/taliouine/taliouine-pise-coffrage-nb.jpg 2400w" sizes="100vw" alt="Deux artisans compactent la terre dans le coffrage du pisé, en noir et blanc" loading="lazy"><figcaption><span class="cap">Le pisé compacté dans son coffrage</span><span class="count">02 / 05</span></figcaption></figure>
+  <figure><img src="photos/taliouine/taliouine-fondations-pierre.jpg" srcset="photos/taliouine/taliouine-fondations-pierre-1200.jpg 1200w, photos/taliouine/taliouine-fondations-pierre.jpg 2400w" sizes="100vw" alt="Artisans montant les fondations en pierre, murs en pisé en construction à droite" loading="lazy"><figcaption><span class="cap">Les soubassements en pierre, au pied des murs en pisé</span><span class="count">03 / 05</span></figcaption></figure>
+  <figure><img src="photos/taliouine/taliouine-pise-pierre-detail.jpg" srcset="photos/taliouine/taliouine-pise-pierre-detail-1200.jpg 1200w, photos/taliouine/taliouine-pise-pierre-detail.jpg 2400w" sizes="100vw" alt="Détail d'un poteau en pisé et d'un mur en pierre aux chaînages en bois" loading="lazy"><figcaption><span class="cap">Pisé et pierre, chaînages en bois</span><span class="count">04 / 05</span></figcaption></figure>
+  <figure><img src="photos/taliouine/taliouine-pise-bache.jpg" srcset="photos/taliouine/taliouine-pise-bache-1200.jpg 1200w, photos/taliouine/taliouine-pise-bache.jpg 2400w" sizes="100vw" alt="Artisans au sommet d'un mur en pisé protégé par une bâche, montagne en arrière-plan" loading="lazy"><figcaption><span class="cap">Un mur en pisé protégé pendant le séchage</span><span class="count">05 / 05</span></figcaption></figure>
+  <button class="prev" type="button" aria-label="Photo précédente">‹</button>
+  <button class="next" type="button" aria-label="Photo suivante">›</button>
+  <div class="bar"></div>
+</section>
 
 <main class="page"><div class="wrap">
   <div class="intro">
@@ -279,4 +306,19 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true');});
 m.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});})();
+</script>
+<script>
+(function(){var r=document.querySelector('.slides');if(!r)return;var f=r.querySelectorAll('figure'),bar=r.querySelector('.bar'),i=0,t,D=5500,
+still=window.matchMedia('(prefers-reduced-motion: reduce)').matches,hold=false;
+function go(n){f[i].classList.remove('on');i=(n+f.length)%f.length;f[i].classList.add('on');var nx=f[(i+1)%f.length].querySelector('img');if(nx.loading==='lazy')nx.loading='eager';run();}
+function run(){clearTimeout(t);bar.classList.remove('run');bar.style.transitionDuration='0ms';bar.offsetWidth;if(still||hold||document.hidden)return;bar.style.transitionDuration=D+'ms';bar.classList.add('run');t=setTimeout(function(){go(i+1);},D);}
+r.querySelector('.prev').addEventListener('click',function(){go(i-1);});
+r.querySelector('.next').addEventListener('click',function(){go(i+1);});
+r.addEventListener('mouseenter',function(){hold=true;run();});r.addEventListener('mouseleave',function(){hold=false;run();});
+document.addEventListener('visibilitychange',run);
+document.addEventListener('keydown',function(e){if(document.querySelector('#menu.open'))return;if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1);});
+var x0=null;r.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+r.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>40)go(dx<0?i+1:i-1);},{passive:true});
+window.addEventListener('load',function(){f[1].querySelector('img').loading='eager';});
+run();})();
 </script>
